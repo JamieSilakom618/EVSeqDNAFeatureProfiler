@@ -1,0 +1,2 @@
+chr,start,end,name,score,strand,reads,bases_covered,region_length,FPKM
+Mito,85294,85777,Q0285,0,+,4378,483,483,1211.864237917563

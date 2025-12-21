@@ -1,0 +1,5 @@
+filename	size
+gene.bed	28
+origin_of_replication.bed	8
+rRNA_gene.bed	2
+tRNA_gene.bed	24

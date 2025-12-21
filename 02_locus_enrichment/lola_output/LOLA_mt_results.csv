@@ -1,0 +1,5 @@
+"userSet","dbSet","collection","pValueLog","oddsRatio","support","rnkPV","rnkOR","rnkSup","maxRnk","meanRnk","b","c","d","description","cellType","tissue","antibody","treatment","dataSource","filename","size"
+1,1,"mt_feature",0,0,204,1,1,1,1,1,0,368,0,NA,NA,NA,NA,NA,NA,"gene.bed",28
+1,3,"mt_feature",0,0,43,1,1,2,2,1.33,0,529,0,NA,NA,NA,NA,NA,NA,"rRNA_gene.bed",2
+1,2,"mt_feature",0,0,39,1,1,3,3,1.67,0,533,0,NA,NA,NA,NA,NA,NA,"origin_of_replication.bed",8
+1,4,"mt_feature",0,0,34,1,1,4,4,2,0,538,0,NA,NA,NA,NA,NA,NA,"tRNA_gene.bed",24

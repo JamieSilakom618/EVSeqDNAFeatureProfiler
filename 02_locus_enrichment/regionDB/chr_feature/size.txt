@@ -1,0 +1,13 @@
+filename	size
+regions/Mating_loci.bed	3
+regions/Replication_origins.bed	548
+regions/centromere.bed	64
+regions/gene.bed	6572
+regions/ncRNA_gene.bed	17
+regions/pseudogene.bed	12
+regions/rRNA_gene.bed	22
+regions/snRNA_gene.bed	6
+regions/snoRNA_gene.bed	77
+regions/tRNA_gene.bed	275
+regions/telomere.bed	63
+regions/transposable_elements.bed	524

@@ -1,0 +1,5 @@
+filename	description
+regions/gene.bed	
+regions/origin_of_replication.bed	
+regions/rRNA_gene.bed	
+regions/tRNA_gene.bed	

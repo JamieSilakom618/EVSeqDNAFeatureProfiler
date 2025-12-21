@@ -1,0 +1,5 @@
+feature_class,total_reads,total_length,FPKM
+gene_mt,12774974,72056,23703.65
+rRNA_gene_mt,437535,6088,9608.67
+tRNA_gene_mt,50744,1839,3689.17
+Replication_origins_mt,80314,4731,2269.67

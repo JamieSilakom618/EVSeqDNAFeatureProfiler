@@ -1,0 +1,29 @@
+query_name,sgdid,systematic_name,gene_name,format_name,description
+Q0010,S000007257,,,Q0010,"Dubious open reading frame; unlikely to encode a protein, based on available experimental and comparative sequence data; partially overlaps the dubious ORF Q0017"
+Q0017,S000007258,,,Q0017,"Dubious open reading frame; unlikely to encode a protein, based on available experimental and comparative sequence data; partially overlaps the dubious ORF Q0010"
+Q0032,S000007259,,,Q0032,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data"
+Q0050,S000007261,,AI1,Q0050,Reverse transcriptase required for splicing of the COX1 pre-mRNA; encoded by a mobile group II intron within the mitochondrial COX1 gene
+Q0055,S000007262,,AI2,Q0055,Reverse transcriptase required for splicing of the COX1 pre-mRNA; encoded by a mobile group II intron within the mitochondrial COX1 gene
+Q0060,S000007263,,AI3,Q0060,Endonuclease I-SceIII; encoded by a mobile group I intron within the mitochondrial COX1 gene
+Q0065,S000007264,,AI4,Q0065,Endonuclease I-SceII; encoded by a mobile group I intron within the mitochondrial COX1 gene; intron is normally spliced by the BI4p maturase but AI4p can mutate to acquire the same maturase activity
+Q0070,S000007265,,AI5_ALPHA,Q0070,Endonuclease I-SceIV; involved in intron mobility; encoded by a mobile group I intron within the mitochondrial COX1 gene
+Q0045,S000007260,,COX1,Q0045,"Subunit I of cytochrome c oxidase (Complex IV); Complex IV is the terminal member of the mitochondrial inner membrane electron transport chain; one of three mitochondrially-encoded subunits; number of introns in different strains varies from 2 to 8, with most strains having 4-6 introns"
+Q0075,S000007266,,AI5_BETA,Q0075,Protein of unknown function; encoded within an intron of the mitochondrial COX1 gene; translational initiation codon is predicted to be ATA rather than ATG
+Q0080,S000007267,,ATP8,Q0080,Subunit 8 of the F0 sector of mitochondrial F1F0 ATP synthase; encoded on the mitochondrial genome; ATP8 and ATP6 mRNAs are not translated in the absence of the F1 sector of ATPase
+Q0085,S000007268,,ATP6,Q0085,"Subunit a of the F0 sector of mitochondrial F1F0 ATP synthase; mitochondrially encoded; translation is specifically activated by Atp22p; ATP6 and ATP8 mRNAs are not translated in the absence of the F1 sector of ATPase; mutations in human ortholog MT-ATP6 are associated with neurodegenerative disorders such as Neurogenic Ataxia and Retinitis Pigmentosa (NARP), Leigh syndrome (LS), Charcot-Marie-Tooth (CMT), and ataxia telangiectasia"
+Q0092,S000007269,,,Q0092,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data"
+Q0110,S000007271,,BI2,Q0110,Mitochondrial mRNA maturase with a role in splicing; encoded by both exon and intron sequences of partially processed COB mRNA
+Q0115,S000007272,,BI3,Q0115,Mitochondrial mRNA maturase; forms a complex with Mrs1p to mediate splicing of the bI3 intron of the COB gene; encoded by both exon and intron sequences of partially processed COB mRNA
+Q0120,S000007273,,BI4,Q0120,Mitochondrial mRNA maturase; forms a complex with Nam2p to mediate splicing of the bI4 intron of the COB gene; encoded by both exon and intron sequences of partially processed COB mRNA
+Q0105,S000007270,,COB,Q0105,"Cytochrome b; mitochondrially-encoded subunit of ubiquinol-cytochrome c reductase complex which includes Cobp, Rip1p, Cyt1p, Cor1p, Qcr2p, Qcr6p, Qcr7p, Qcr8p, Qcr9p, and Qcr10p; number of introns varies between strains from 0 to 6, with most having 5"
+Q0130,S000007274,,OLI1,Q0130,F0-ATP synthase subunit c (ATPase-associated proteolipid); encoded on the mitochondrial genome; mutation confers oligomycin resistance; expression is specifically dependent on the nuclear genes AEP1 and AEP2
+Q0140,S000007275,,VAR1,Q0140,Mitochondrial ribosomal protein of the small subunit; mitochondrially-encoded; polymorphic in different strains due to variation in number of AAT (asparagine) codons; translated near the mitochondrial inner membrane; may have a role in loss of mitochondrial DNA under stress conditions
+Q0142,S000007276,,,Q0142,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data; partially overlaps dubious open reading frame Q0143"
+Q0143,S000007277,,,Q0143,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data"
+Q0144,S000007278,,,Q0144,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data"
+Q0160,S000007279,,SCEI,Q0160,I-SceI DNA endonuclease; encoded by the mitochondrial group I intron of the 21S_rRNA gene; mediates gene conversion that propagates the intron into intron-less copies of the 21S_rRNA gene
+Q0182,S000007280,,,Q0182,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data"
+Q0250,S000007281,,COX2,Q0250,Subunit II of cytochrome c oxidase (Complex IV); Complex IV is the terminal member of the mitochondrial inner membrane electron transport chain; one of three mitochondrially-encoded subunits
+Q0255,S000007282,,,Q0255,Maturase-like protein
+Q0275,S000007283,,COX3,Q0275,Subunit III of cytochrome c oxidase (Complex IV); Complex IV is the terminal member of the mitochondrial inner membrane electron transport chain; one of three mitochondrially-encoded subunits; ubiquinone-binding protein
+Q0297,S000007284,,,Q0297,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data; partially overlaps the verified gene RPM1"

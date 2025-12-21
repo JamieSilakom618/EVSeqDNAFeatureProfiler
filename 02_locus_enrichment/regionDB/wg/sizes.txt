@@ -1,0 +1,3 @@
+filename	size
+mtDNA.bed	1
+nDNA.bed	16

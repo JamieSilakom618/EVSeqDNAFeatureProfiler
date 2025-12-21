@@ -1,0 +1,68 @@
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+*.Rproj.user/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Large data files
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bai
+*.sam
+*.bed
+*.bedgraph
+*.wig
+*.bigWig
+
+# Results that can be regenerated
+temp/
+tmp/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local configuration
+local_config.ini

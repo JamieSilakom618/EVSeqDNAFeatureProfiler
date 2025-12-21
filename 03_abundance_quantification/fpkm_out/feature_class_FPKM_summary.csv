@@ -1,0 +1,13 @@
+feature_class,total_reads,total_length,FPKM
+rRNA_gene,233727,28150,1110.08
+tRNA_gene,7076,21939,43.12
+Replication_origins,33692,106351,42.36
+Mating_loci,2428,8858,36.65
+snoRNA_gene,3715,14029,35.40
+centromere,836,3766,29.68
+gene,1710152,8810793,25.95
+snRNA_gene,431,2408,23.93
+ncRNA_gene,2375,15329,20.71
+transposable_elements,105354,699847,20.13
+pseudogene,605,10359,7.81
+telomere,3136,143955,2.91

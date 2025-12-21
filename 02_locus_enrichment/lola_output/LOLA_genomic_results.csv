@@ -1,0 +1,3 @@
+"userSet","dbSet","collection","pValueLog","oddsRatio","support","rnkPV","rnkOR","rnkSup","maxRnk","meanRnk","b","c","d","description","cellType","tissue","antibody","treatment","dataSource","filename","size"
+1,1,"wg",28.3676802772222,Inf,572,1,1,2,2,1.33,0,71765,8716,NA,NA,NA,NA,NA,NA,"mtDNA.bed",1
+1,2,"wg",0,0,71765,2,2,1,2,1.67,8716,572,0,NA,NA,NA,NA,NA,NA,"nDNA.bed",16

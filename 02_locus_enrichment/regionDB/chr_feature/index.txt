@@ -1,0 +1,13 @@
+filename	description
+regions/Mating_loci.bed	
+regions/Replication_origins.bed	
+regions/centromere.bed	
+regions/gene.bed	
+regions/ncRNA_gene.bed	
+regions/pseudogene.bed	
+regions/rRNA_gene.bed	
+regions/snRNA_gene.bed	
+regions/snoRNA_gene.bed	
+regions/tRNA_gene.bed	
+regions/telomere.bed	
+regions/transposable_elements.bed	
