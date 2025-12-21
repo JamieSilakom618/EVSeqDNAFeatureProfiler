@@ -1,10 +1,10 @@
-# EV-seq Analysis Workflow
+# EV-seq DNA Feature Profiler
 
-This repository contains the computational workflow for Extracellular Vesicle sequencing (EV-seq) analysis described in our manuscript submitted to the Journal of Extracellular Vesicles. The workflow enables reproducible analysis of DNA content within extracellular vesicles.
+This repository contains a computational workflow for Extracellular Vesicle sequencing (EV-seq) analysis. The workflow enables reproducible analysis of DNA content within extracellular vesicles for *Saccharomyces cerevisiae*.
 
 ## Abstract
 
-This computational pipeline analyzes DNA content in extracellular vesicles through a systematic four-step approach: quality control and genome alignment, genomic composition analysis, feature-level enrichment testing, and abundance quantification. The workflow is designed for reproducibility and follows best practices for bioinformatics research.
+This computational pipeline analyzes DNA content in extracellular vesicles through a systematic three-step approach: quality control and genome alignment with genomic composition analysis, feature-level enrichment testing, and abundance quantification. The workflow is designed for reproducibility and follows best practices for bioinformatics research.
 
 ## workflow Information
 - **Author**: Nutticha Silakom
@@ -46,20 +46,38 @@ pip install -r requirements.txt
 Rscript -e "install.packages(c('LOLA', 'GenomicRanges'))"
 ```
 
-## Reproducibility Statement
-
-This workflow follows FAIR (Findable, Accessible, Interoperable, Reusable) principles:
-- All analysis parameters are documented in `config.ini`
-- Software versions are specified in `requirements.txt`
-- Random seeds are set for reproducible statistical analyses
-- All scripts include detailed documentation and error handling
-
 ## Quick Start
 
-1. Place raw FASTQ files in `01_read_processing_and_genomic_composition/`
-2. Run alignment, quality control, and genomic composition analysis
-3. Perform locus enrichment analysis
-4. Quantify EV DNA abundance
+### Input Data Requirements
+Prepare your input files in the following structure:
+```
+your_data/
+├── raw_fastq/
+│   ├── sample_R1.fastq.gz  # Forward reads
+│   └── sample_R2.fastq.gz  # Reverse reads (if paired-end)
+└── reference/
+    ├── genome.fasta        # Reference genome
+    └── annotation.gff      # Genome annotation
+```
+
+### Workflow Steps
+1. **Configure Parameters**: Edit `config.ini` with your file paths and parameters
+2. **Step 1 - Read Processing**: Process FASTQ files and analyze genomic composition
+   ```bash
+   cd 01_read_processing_and_genomic_composition/
+   ./qc_alignment.sh /path/to/your/fastq/files
+   ```
+3. **Step 2 - Locus Enrichment**: Perform LOLA enrichment analysis
+   ```bash
+   cd ../02_locus_enrichment/
+   Rscript lola_run.R
+   ```
+4. **Step 3 - Abundance Quantification**: Calculate FPKM and correlations
+   ```bash
+   cd ../03_abundance_quantification/
+   python calculate_fpkm.py
+   python correlation_test.py
+   ```
 
 ## Directory Structure
 
@@ -72,9 +90,6 @@ exo_seq/
 └── results/                                    # Final output files
 ```
 
-## Citation
-
-Please cite the associated publication when using this workflow.
 
 ## References
 
