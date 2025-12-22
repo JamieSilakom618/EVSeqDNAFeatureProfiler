@@ -49,15 +49,12 @@ Rscript -e "install.packages(c('LOLA', 'GenomicRanges'))"
 ## Quick Start
 
 ### Input Data Requirements
-Prepare your input files in the following structure:
+All input data files should be placed in the `data/` folder:
 ```
-your_data/
-├── raw_fastq/
-│   ├── sample_R1.fastq.gz  # Forward reads
-│   └── sample_R2.fastq.gz  # Reverse reads (if paired-end)
-└── reference/
-    ├── genome.fasta        # Reference genome
-    └── annotation.gff      # Genome annotation
+data/
+├── gene_fpkm.csv                      # EV-seq FPKM results  
+├── srr5658399_count_with_length.csv   # RNA-seq reference data
+└── s288c_annotation_genome.gff        # S. cerevisiae annotation
 ```
 
 ### Workflow Steps

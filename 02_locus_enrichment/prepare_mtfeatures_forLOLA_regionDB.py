@@ -174,10 +174,22 @@ def extract_mito_features(gff_path: str, mapping: Dict[str, Iterable[str]],
 
 def main():
     p = argparse.ArgumentParser(description="Extract mitochondrial (seqid == 'Mito') features into per-mapping BED files.")
-    p.add_argument("gff", help="Input GFF/GFF3 (can be .gz)")
+    p.add_argument("gff", 
+                  nargs='?',
+                  default="../data/s288c_annotation_genome.gff",
+                  help="Input GFF/GFF3 (can be .gz) (default: ../data/s288c_annotation_genome.gff)")
     p.add_argument("-o", "--outdir", default="regionDB", help="Output directory for BED files (default: regionDB)")
     p.add_argument("--overwrite", action="store_true", help="Overwrite existing BED files instead of appending")
     args = p.parse_args()
+
+    # Check if GFF file exists
+    if not os.path.exists(args.gff):
+        print(f"Error: GFF file not found: {args.gff}")
+        print("Please ensure the S. cerevisiae annotation file is available")
+        sys.exit(1)
+    
+    print(f"Using GFF file: {args.gff}")
+    print(f"Output directory: {args.outdir}")
 
     extract_mito_features(args.gff, FEATURE_MAPPING, SINGLE_FEATURES, args.outdir, overwrite=args.overwrite)
 

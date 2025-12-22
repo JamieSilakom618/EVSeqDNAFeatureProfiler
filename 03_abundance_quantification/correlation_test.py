@@ -57,16 +57,25 @@ print("="*60)
 # -----------------------------
 # Load and validate data
 # -----------------------------
+# Input data file
 data_file = "merged_CPM_table.csv"
+data_folder_file = "../data/merged_CPM_table.csv"
 
-if not os.path.exists(data_file):
-    print(f"Error: Data file '{data_file}' not found")
+# Check for data file in current directory first, then data folder
+if os.path.exists(data_file):
+    input_path = data_file
+elif os.path.exists(data_folder_file):
+    input_path = data_folder_file
+    print(f"Using data file from data directory: {data_folder_file}")
+else:
+    print(f"Error: Data file not found")
+    print(f"Looked for: {data_file} and {data_folder_file}")
     print("Please ensure the merged CPM table has been generated using merge_file.py")
     sys.exit(1)
 
 try:
-    df = pd.read_csv(data_file)
-    print(f"Loaded data: {df.shape[0]} features, {df.shape[1]} columns")
+    df = pd.read_csv(input_path)
+    print(f"Loaded data from {input_path}: {df.shape[0]} features, {df.shape[1]} columns")
 except Exception as e:
     print(f"Error loading data file: {e}")
     sys.exit(1)

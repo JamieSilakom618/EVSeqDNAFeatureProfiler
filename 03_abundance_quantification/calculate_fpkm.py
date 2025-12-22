@@ -41,7 +41,6 @@ from datetime import datetime
 # Print script information
 print("="*60)
 print("FPKM Calculation for EV-seq Analysis")
-print("Journal of Extracellular Vesicles - Supporting Code")
 print("Version 1.0.0")
 print(f"Execution time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print("="*60)

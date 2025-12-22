@@ -22,9 +22,13 @@ This directory contains the LOLA (Locus Overlap Analysis) workflow for assessing
 ## Usage
 
 ```bash
-# Prepare region databases
+# Prepare region databases (uses ../data/s288c_annotation_genome.gff by default)
 python prepare_regionBD_forlola.py
 python prepare_mtfeatures_forLOLA_regionDB.py
+
+# Or specify custom GFF file
+python prepare_regionBD_forlola.py /path/to/custom.gff
+python prepare_mtfeatures_forLOLA_regionDB.py /path/to/custom.gff
 
 # Run LOLA analysis
 Rscript lola_run.R

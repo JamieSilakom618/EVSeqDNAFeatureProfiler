@@ -216,11 +216,23 @@ def gff_to_beds(gff_path, outdir, mapping, single_features=set(), skip_mito=True
 
 def main():
     parser = argparse.ArgumentParser(description="Create regionDB BED files from a GFF using a feature mapping.")
-    parser.add_argument("gff", help="Input GFF file")
+    parser.add_argument("gff", 
+                       nargs='?', 
+                       default="../data/s288c_annotation_genome.gff",
+                       help="Input GFF file (default: ../data/s288c_annotation_genome.gff)")
     parser.add_argument("--outdir", "-o", default="regionDB", help="Output directory for BED files (default: regionDB)")
     parser.add_argument("--no-skip-mito", dest="skip_mito", action="store_false", help="Don't skip mitochondrial contigs")
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing BED files rather than append")
     args = parser.parse_args()
+
+    # Check if GFF file exists
+    if not os.path.exists(args.gff):
+        print(f"Error: GFF file not found: {args.gff}")
+        print("Please ensure the S. cerevisiae annotation file is available")
+        sys.exit(1)
+    
+    print(f"Using GFF file: {args.gff}")
+    print(f"Output directory: {args.outdir}")
 
     # optionally extend SINGLE_FEATURES from mapping keys that are plain strings (not lists)
     # but we already pre-defined SINGLE_FEATURES above; you can also auto-detect:

@@ -22,6 +22,16 @@ Query SGD (Saccharomyces Genome Database) API to annotate gene lists with:
 Usage:
     python sgd_lookup.py -i input.csv -o output.csv -c gene_column
 
+Examples:
+    # Basic usage with default files
+    python sgd_lookup.py
+
+    # Custom input and output files
+    python sgd_lookup.py -i ../data/genes.csv -o genes_with_sgd_annotation.csv -c gene_name
+    
+    # Using gene IDs from different column
+    python sgd_lookup.py -i gene_list.csv -o annotated_genes.csv -c systematic_name
+
 Input:
     - CSV file with gene identifiers
     - Column name containing gene IDs
@@ -37,7 +47,7 @@ Requirements:
     - pandas >= 1.3.0
     - Internet connection for SGD API access
 """
-
+import os
 import sys
 import argparse
 import requests
@@ -49,8 +59,12 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Lookup yeast genes in SGD using the official locus API"
     )
-    parser.add_argument("-i", "--input", required=True, help="Input CSV file")
-    parser.add_argument("-o", "--output", required=True, help="Output CSV file")
+    parser.add_argument("-i", "--input", 
+                       default="../fpkm_out/gene_mt_fpkm.csv",
+                       help="Input CSV file (default: ../fpkm_out/gene_mt_fpkm.csv)")
+    parser.add_argument("-o", "--output", 
+                       default="gene_mt_fpkm_w_name.csv",
+                       help="Output CSV file (default: gene_mt_fpkm_w_name.csv)")
     parser.add_argument(
         "-c", "--column",
         default="name",
@@ -94,9 +108,23 @@ def query_sgd_locus(locus):
 def main():
     args = parse_args()
 
+    # Check if input file exists, try data folder as backup
+    input_file = args.input
+    if not os.path.exists(input_file):
+        # Try relative path from data folder
+        backup_path = f"../../data/{os.path.basename(input_file)}"
+        if os.path.exists(backup_path):
+            input_file = backup_path
+            print(f"Using backup file from data: {input_file}")
+        else:
+            print(f"Error: Input file not found: {args.input}")
+            print(f"Also checked: {backup_path}")
+            sys.exit(1)
+
     # Load input CSV
     try:
-        df = pd.read_csv(args.input)
+        df = pd.read_csv(input_file)
+        print(f"Loaded input file: {input_file}")
     except Exception as e:
         sys.exit(f"ERROR reading input CSV: {e}")
 
