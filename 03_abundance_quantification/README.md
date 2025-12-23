@@ -4,10 +4,12 @@ This directory contains scripts for quantifying genomic feature abundance and co
 
 ## Process Overview
 
-1. **Read Counting**: HTSeq-based read quantification normalized to feature length
+1. **Read Counting**: BEDtools coverage-based read quantification normalized to feature length
 2. **FPKM Calculation**: Fragments Per Kilobase Million calculation for abundance estimation
-3. **Correlation Analysis**: Spearman correlation between EV-seq and RNA-seq abundance
-4. **Statistical Testing**: Assessment at multiple hierarchical genomic levels
+3. **High-Expression Analysis**: Identification and analysis of top 1% abundant genes
+4. **Correlation Analysis**: Spearman correlation between EV-seq and RNA-seq abundance
+5. **Gene Intersection**: Comparative analysis of highly abundant genes across datasets
+6. **Statistical Testing**: Assessment at multiple hierarchical genomic levels
 
 ## Files
 
@@ -20,10 +22,16 @@ This directory contains scripts for quantifying genomic feature abundance and co
 - `region_for_fpkm/` - BED files defining genomic regions
 - `geneID_search/` - Gene ID lookup and annotation
 
-### Correlation Analysis
-- `correlation_test.py` - Spearman correlation analysis
-- `merge_file.py` - Merge EV-seq and RNA-seq data
-- `merged_CPM_table.csv` - Merged CPM data for analysis
+### High-Expression Gene Analysis
+- `compare_gene_high_express/` - Analysis of highly abundant genes
+  - `correlation_test.py` - Spearman correlation analysis
+  - `merge_file.py` - Merge EV-seq and RNA-seq data
+  - `merged_CPM_table.csv` - Merged CPM data for analysis
+  - `intersect_genes.py` - Gene intersection analysis script
+  - `gene_99thpercentile_high_abundance.csv` - Top 1% highly abundant genes
+  - `gene_srr_99thpercetle_high_abundance.csv` - Top 1% genes from SRR data
+  - `intersect_genes.csv` - Gene intersection results
+  - `intersect_genes_with_names.csv` - Annotated gene intersection results
 
 ## Usage
 
@@ -32,9 +40,11 @@ This directory contains scripts for quantifying genomic feature abundance and co
 ./run_bedtools_coverage.sh
 python calculate_fpkm.py
 
-# Perform correlation analysis
+# Perform high-expression gene analysis
+cd compare_gene_high_express/
 python merge_file.py
 python correlation_test.py
+python intersect_genes.py
 ```
 
 ## Analysis Levels
@@ -58,5 +68,7 @@ Quantification is performed at four hierarchical levels:
 
 - FPKM values for all genomic features
 - Correlation coefficients between EV-seq and RNA-seq
+- Top 1% highly abundant gene lists
+- Gene intersection analysis results
 - Feature abundance rankings
 - Statistical significance testing results
