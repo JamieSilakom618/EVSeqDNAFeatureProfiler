@@ -1,5 +1,5 @@
 "userSet","dbSet","collection","pValueLog","oddsRatio","support","rnkPV","rnkOR","rnkSup","maxRnk","meanRnk","b","c","d","description","cellType","tissue","antibody","treatment","dataSource","filename","size"
-1,1,"mt_feature",0,0,204,1,1,1,1,1,0,368,0,NA,NA,NA,NA,NA,NA,"gene.bed",28
-1,3,"mt_feature",0,0,43,1,1,2,2,1.33,0,529,0,NA,NA,NA,NA,NA,NA,"rRNA_gene.bed",2
-1,2,"mt_feature",0,0,39,1,1,3,3,1.67,0,533,0,NA,NA,NA,NA,NA,NA,"origin_of_replication.bed",8
-1,4,"mt_feature",0,0,34,1,1,4,4,2,0,538,0,NA,NA,NA,NA,NA,NA,"tRNA_gene.bed",24
+1,1,"mt_feature",10.0927463149736,Inf,204,1,1,1,1,1,0,72133,8716,NA,NA,NA,NA,NA,NA,"gene.bed",28
+1,3,"mt_feature",2.12515302346402,Inf,43,2,1,2,2,1.67,0,72294,8716,NA,NA,NA,NA,NA,NA,"rRNA_gene.bed",2
+1,2,"mt_feature",1.92741397696914,Inf,39,3,1,3,3,2.33,0,72298,8716,NA,NA,NA,NA,NA,NA,"origin_of_replication.bed",8
+1,4,"mt_feature",1.68025470964782,Inf,34,4,1,4,4,3,0,72303,8716,NA,NA,NA,NA,NA,NA,"tRNA_gene.bed",24

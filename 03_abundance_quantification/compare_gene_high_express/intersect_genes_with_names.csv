@@ -1,0 +1,7 @@
+query_name,sgdid,systematic_name,gene_name,format_name,description
+YLR154W-F,S000028843,,,YLR154W-F,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data; encoded within the 35S rRNA gene on the opposite strand"
+YLR154W-A,S000028675,,,YLR154W-A,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data; encoded within the 25S rRNA gene on the opposite strand"
+YLR154W-B,S000028563,,,YLR154W-B,"Dubious open reading frame; unlikely to encode a functional protein, based on available experimental and comparative sequence data; encoded within the 25S rRNA gene on the opposite strand"
+YLR154C-G,S000028561,,,YLR154C-G,Protein of unknown function; identified by fungal homology comparisons and RT-PCR; this ORF is contained within RDN25-2 and RDN37-2
+YLR154W-C,S000028422,,TAR1,YLR154W-C,Protein potentially involved in regulation of respiratory metabolism; located in the mitochondria; interacts genetically with RPO41 and physically with Coq5p; encoded within the 25S rRNA gene on the opposite strand
+YHL015W,S000001007,,RPS20,YHL015W,Protein component of the small (40S) ribosomal subunit; overproduction suppresses mutations affecting RNA polymerase III-dependent transcription; homologous to mammalian ribosomal protein S20 and bacterial S10
