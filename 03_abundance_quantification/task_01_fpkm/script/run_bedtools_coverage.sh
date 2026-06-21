@@ -32,9 +32,32 @@
 
 set -euo pipefail
 
-REGION_DIR="FPKM/region_for_fpkm"
-BAM="aligned.mapped.sorted.bam"
-OUTDIR="coverage_count"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TASK_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+WORKFLOW_ROOT="$(cd "${TASK_ROOT}/../.." && pwd)"
+
+REGION_DIR="${TASK_ROOT}/input_data/region_for_fpkm"
+BAM="${WORKFLOW_ROOT}/aligned.mapped.sorted.bam"
+OUTDIR="${TASK_ROOT}/output_data/coverage_count"
+
+# Fallback: also check current working directory
+if [[ ! -f "${BAM}" ]]; then
+    BAM="aligned.mapped.sorted.bam"
+fi
+
+# NOTE: The BAM file (aligned.mapped.sorted.bam) is NOT included in this repository
+# because it is too large for version control (typically >10 GB).
+# You must supply it before running this script.
+if [[ ! -f "${BAM}" ]]; then
+    echo "" >&2
+    echo "ERROR: BAM file not found: ${BAM}" >&2
+    echo "" >&2
+    echo "The aligned BAM file is too large to include in this repository." >&2
+    echo "Please generate or obtain it and place it at:" >&2
+    echo "  ${WORKFLOW_ROOT}/aligned.mapped.sorted.bam" >&2
+    echo "" >&2
+    exit 1
+fi
 
 mkdir -p "${OUTDIR}"
 

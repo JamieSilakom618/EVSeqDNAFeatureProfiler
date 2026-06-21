@@ -58,8 +58,13 @@ print("="*60)
 # Load and validate data
 # -----------------------------
 # Input data file
-data_file = "merged_CPM_table.csv"
-data_folder_file = "../data/merged_CPM_table.csv"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+task_root = os.path.dirname(script_dir)
+workflow_root = os.path.dirname(task_root)
+project_root = os.path.dirname(workflow_root)
+
+data_file = os.path.join(task_root, "output_data", "merged_CPM_table.csv")
+data_folder_file = os.path.join(project_root, "data", "merged_CPM_table.csv")
 
 # Check for data file in current directory first, then data folder
 if os.path.exists(data_file):

@@ -54,12 +54,25 @@ print("="*60)
 # -----------------------------
 # 1. Load input count tables
 # -----------------------------
-# Use relative paths to data folder
 script_dir = os.path.dirname(os.path.abspath(__file__))
-repo_root = os.path.dirname(script_dir)
+task_root = os.path.dirname(script_dir)
+workflow_root = os.path.dirname(task_root)
+project_root = os.path.dirname(workflow_root)
 
-ev_file_path = os.path.join(repo_root, "data", "gene_fpkm.csv")
-srr_file_path = os.path.join(repo_root, "data", "srr5658399_count_with_lenght.xlsx")
+ev_candidates = [
+    os.path.join(workflow_root, "task_01_fpkm", "output_data", "fpkm_out", "gene_fpkm.csv"),
+    os.path.join(project_root, "data", "gene_fpkm.csv"),
+]
+
+srr_candidates = [
+    os.path.join(task_root, "input_data", "srr5658399_count_with_length.xlsx"),
+    os.path.join(task_root, "input_data", "srr5658399_count_with_lenght.xlsx"),
+    os.path.join(project_root, "data", "srr5658399_count_with_length.xlsx"),
+    os.path.join(project_root, "data", "srr5658399_count_with_lenght.xlsx"),
+]
+
+ev_file_path = next((path for path in ev_candidates if os.path.exists(path)), ev_candidates[-1])
+srr_file_path = next((path for path in srr_candidates if os.path.exists(path)), srr_candidates[-1])
 
 # Check if files exist
 if not os.path.exists(ev_file_path):
@@ -98,13 +111,24 @@ ev_df["fpkm_evseq"] = (ev_df["reads"] * 1e9) / (ev_df["region_length"] * ev_tota
 # SRR RNA-seq FPKM
 srr_df["fpkm_srr"] = (srr_df["count"] * 1e9) / (srr_df["region_length"] * srr_total)
 
+# -----------------------------
+# 3.1 Label top 1% by FPKM (99th percentile cutoff)
+# -----------------------------
+ev_fpkm_cutoff = ev_df["fpkm_evseq"].quantile(0.99)
+srr_fpkm_cutoff = srr_df["fpkm_srr"].quantile(0.99)
+
+ev_df["ev_abundance"] = "not_preferentially_represent"
+ev_df.loc[ev_df["fpkm_evseq"] >= ev_fpkm_cutoff, "ev_abundance"] = "preferentially_represented"
+
+srr_df["srr_abundance"] = "not_preferentially_represent"
+srr_df.loc[srr_df["fpkm_srr"] >= srr_fpkm_cutoff, "srr_abundance"] = "preferentially_represented"
 
 # -----------------------------
 # 4. Merge tables by gene ID
 # -----------------------------
 merged_df = pd.merge(
-    ev_df[["name", "region_length", "reads", "cpm_evseq", "fpkm_evseq"]],
-    srr_df[["gene_id", "count", "cpm_srr", "fpkm_srr"]],
+    ev_df[["name", "region_length", "reads", "cpm_evseq", "fpkm_evseq", "ev_abundance"]],
+    srr_df[["gene_id", "count", "cpm_srr", "fpkm_srr", "srr_abundance"]],
     left_on="name",
     right_on="gene_id",
     how="inner"   # use "outer" to keep all genes
@@ -114,12 +138,35 @@ merged_df = pd.merge(
 # -----------------------------
 # 4. Save output
 # -----------------------------
-output_file = "merged_CPM_table.csv"
-data_output = os.path.join(repo_root, "data", output_file)
+output_dir = os.path.join(task_root, "output_data")
+os.makedirs(output_dir, exist_ok=True)
 
-# Save in both current directory and data folder for flexibility
+output_file = os.path.join(output_dir, "merged_CPM_table.csv")
+data_output = os.path.join(project_root, "data", "merged_CPM_table.csv")
+ev_top1pct_output = os.path.join(output_dir, "gene_99thpercentile_high_abundance.csv")
+srr_top1pct_output = os.path.join(output_dir, "gene_srr_99thpercentile_high_abundance.csv")
+
+# Save in task output folder and legacy data folder for compatibility
 merged_df.to_csv(output_file, index=False)
 merged_df.to_csv(data_output, index=False)
 
+# Build top-1% tables from merged data for EV-only and SRR-only high expression
+ev_top1pct_df = merged_df.loc[
+    merged_df["ev_abundance"] == "preferentially_represented",
+    ["name", "region_length", "reads", "cpm_evseq", "fpkm_evseq", "ev_abundance"],
+].copy()
+ev_top1pct_df.insert(0, "gene_id", ev_top1pct_df["name"])
+
+srr_top1pct_df = merged_df.loc[
+    merged_df["srr_abundance"] == "preferentially_represented",
+    ["name", "region_length", "reads", "count", "cpm_srr", "fpkm_srr", "srr_abundance"],
+].copy()
+srr_top1pct_df.insert(0, "Gene", srr_top1pct_df["name"])
+
+ev_top1pct_df.to_csv(ev_top1pct_output, index=False)
+srr_top1pct_df.to_csv(srr_top1pct_output, index=False)
+
 print(f"Merged CPM table saved as {output_file}")
 print(f"Also saved to {data_output}")
+print(f"EV top 1% table saved as {ev_top1pct_output} ({len(ev_top1pct_df)} rows)")
+print(f"SRR top 1% table saved as {srr_top1pct_output} ({len(srr_top1pct_df)} rows)")

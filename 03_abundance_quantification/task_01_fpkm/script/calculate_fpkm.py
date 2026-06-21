@@ -38,6 +38,11 @@ import sys
 import subprocess
 from datetime import datetime
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+task_root = os.path.dirname(script_dir)
+workflow_root = os.path.dirname(task_root)
+project_root = os.path.dirname(workflow_root)
+
 # Print script information
 print("="*60)
 print("FPKM Calculation for EV-seq Analysis")
@@ -48,7 +53,7 @@ print("="*60)
 # -----------------------------
 # Get total mapped reads from BAM file
 # -----------------------------
-def get_total_mapped_reads(bam_file="aligned.mapped.sorted.bam"):
+def get_total_mapped_reads(bam_file):
     """
     Get total mapped reads from BAM file using samtools
     
@@ -82,11 +87,18 @@ def get_total_mapped_reads(bam_file="aligned.mapped.sorted.bam"):
         sys.exit(1)
 
 # Get total mapped reads from BAM file
-TOTAL_MAPPED_READS = get_total_mapped_reads()
+bam_candidates = [
+    os.path.join(project_root, "aligned.mapped.sorted.bam"),
+    os.path.join(workflow_root, "aligned.mapped.sorted.bam"),
+    "aligned.mapped.sorted.bam",
+]
+
+bam_file = next((path for path in bam_candidates if os.path.exists(path)), bam_candidates[-1])
+TOTAL_MAPPED_READS = get_total_mapped_reads(bam_file)
 
 # Also try to get from config as fallback (for documentation purposes)
 config = configparser.ConfigParser()
-config_path = '../config.ini'
+config_path = os.path.join(project_root, 'config.ini')
 
 if os.path.exists(config_path):
     config.read(config_path)
@@ -102,8 +114,8 @@ if os.path.exists(config_path):
 # -----------------------------
 # Validate input directories
 # -----------------------------
-COUNTS_DIR = "coverage_count"
-OUT_DIR = "fpkm_out"
+COUNTS_DIR = os.path.join(task_root, "output_data", "coverage_count")
+OUT_DIR = os.path.join(task_root, "output_data", "fpkm_out")
 
 if not os.path.exists(COUNTS_DIR):
     print(f"Error: Input directory '{COUNTS_DIR}' not found")

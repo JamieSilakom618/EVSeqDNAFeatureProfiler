@@ -55,16 +55,22 @@ import pandas as pd
 import time
 
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TASK_ROOT = os.path.dirname(SCRIPT_DIR)
+WORKFLOW_ROOT = os.path.dirname(TASK_ROOT)
+PROJECT_ROOT = os.path.dirname(WORKFLOW_ROOT)
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Lookup yeast genes in SGD using the official locus API"
     )
     parser.add_argument("-i", "--input", 
-                       default="../fpkm_out/gene_mt_fpkm.csv",
-                       help="Input CSV file (default: ../fpkm_out/gene_mt_fpkm.csv)")
+                       default=os.path.join(WORKFLOW_ROOT, "task_01_fpkm", "output_data", "fpkm_out", "gene_mt_fpkm.csv"),
+                       help="Input CSV file (default: task_01_fpkm/output_data/fpkm_out/gene_mt_fpkm.csv)")
     parser.add_argument("-o", "--output", 
-                       default="gene_mt_fpkm_w_name.csv",
-                       help="Output CSV file (default: gene_mt_fpkm_w_name.csv)")
+                       default=os.path.join(TASK_ROOT, "output_data", "gene_mt_fpkm_w_name.csv"),
+                       help="Output CSV file (default: task_03_gene_annotation/output_data/gene_mt_fpkm_w_name.csv)")
     parser.add_argument(
         "-c", "--column",
         default="name",
@@ -112,7 +118,7 @@ def main():
     input_file = args.input
     if not os.path.exists(input_file):
         # Try relative path from data folder
-        backup_path = f"../../data/{os.path.basename(input_file)}"
+        backup_path = os.path.join(PROJECT_ROOT, "data", os.path.basename(input_file))
         if os.path.exists(backup_path):
             input_file = backup_path
             print(f"Using backup file from data: {input_file}")
@@ -161,9 +167,10 @@ def main():
     print(f"Not found: {len(not_found)}")
 
     if not_found:
-        with open("sgd_not_found.txt", "w") as f:
+        missing_file = os.path.join(TASK_ROOT, "output_data", "sgd_not_found.txt")
+        with open(missing_file, "w") as f:
             f.write("\n".join(not_found))
-        print("Missing genes written to: sgd_not_found.txt")
+        print(f"Missing genes written to: {missing_file}")
 
 
 if __name__ == "__main__":
