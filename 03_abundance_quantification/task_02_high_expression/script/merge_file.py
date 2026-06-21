@@ -106,8 +106,7 @@ srr_df["cpm_srr"] = (srr_df["count"] / srr_total) * 1e6
 # 3. Calculate FPKM for each dataset
 # -----------------------------
 # EV-seq FPKM: FPKM = (reads * 1,000,000,000) / (gene_length * total_reads)
-ev_df["fpkm_evseq"] = (ev_df["reads"] * 1e9) / (ev_df["region_length"] * ev_total)
-
+ev_df["fpkm_evseq"] = ev_df['FPKM']  
 # SRR RNA-seq FPKM
 srr_df["fpkm_srr"] = (srr_df["count"] * 1e9) / (srr_df["region_length"] * srr_total)
 
