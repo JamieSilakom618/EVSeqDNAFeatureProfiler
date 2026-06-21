@@ -2,21 +2,39 @@
 
 This repository contains a computational workflow for Extracellular Vesicle sequencing (EV-seq) analysis. The workflow enables reproducible analysis of DNA content within extracellular vesicles for *Saccharomyces cerevisiae*.
 
-## Abstract
+## Overview
 
 This computational pipeline analyzes DNA content in extracellular vesicles through a systematic three-step approach: quality control and genome alignment with genomic composition analysis, feature-level enrichment testing, and abundance quantification. The workflow is designed for reproducibility and follows best practices for bioinformatics research.
 
-## workflow Information
+## Workflow Information
 - **Author**: Nutticha Silakom
 - **Institution**: Chulalongkorn University, Bangkok, Thailand
 - **Program**: Bioinformatics and Computational Biology, Graduate School
 - **Workflow Version**: 1.0.0
-- **Last Updated**: December 2025
+- **Last Updated**: June 2026
 - **Data Availability**: All scripts and analysis parameters are provided for full reproducibility
+- **License**: MIT License
+
+## Data Availability
+
+Raw FASTQ and aligned BAM files are **not included** in this repository due to file size. Data submission is in progress.
+
+Once raw data is available:
+1. Align reads using the script in `01_read_processing_and_genomic_composition/`:
+   ```bash
+   cd 01_read_processing_and_genomic_composition/
+   bash qc_alignment.sh <sample_id> <fastq_r1> <fastq_r2> <reference_fasta> [threads]
+   ```
+2. Place the output BAM in the project root:
+   ```bash
+   cp results/alignment_out/<sample_id>.sorted.bam ../aligned.mapped.sorted.bam
+   ```
+
+All downstream output files (FPKM tables, CPM tables, top-1% gene lists) are already included under `03_abundance_quantification/` for reproducibility.
 
 ## Workflow Overview
 
-The analysis pipeline consists of three main steps, each corresponding to sections in the manuscript methodology:
+The analysis pipeline has three stages:
 
 1. **Read Processing and Genomic Composition Analysis** (`01_read_processing_and_genomic_composition/`)
 2. **Feature-Level Locus Enrichment Analysis** (`02_locus_enrichment/`)
@@ -49,44 +67,56 @@ Rscript -e "install.packages(c('LOLA', 'GenomicRanges'))"
 ## Quick Start
 
 ### Input Data Requirements
-All input data files should be placed in the `data/` folder:
+Place shared input data files in the `data/` folder:
 ```
 data/
-├── gene_fpkm.csv                      # EV-seq FPKM results  
-├── srr5658399_count_with_length.csv   # RNA-seq reference data
-└── s288c_annotation_genome.gff        # S. cerevisiae annotation
+├── gene_fpkm.csv                       # EV-seq FPKM results
+├── srr5658399_count_with_length.xlsx   # RNA-seq reference count data
+└── s288c_annotation_genome.gff         # Reference genome annotation
 ```
 
 ### Workflow Steps
-1. **Configure Parameters**: Edit `config.ini` with your file paths and parameters
-2. **Step 1 - Read Processing**: Process FASTQ files and analyze genomic composition
+1. **Configure Parameters**: Edit `config.ini` only if you need custom paths
+2. **Step 1 - Read Processing**: Run QC, alignment, and BAM generation
    ```bash
    cd 01_read_processing_and_genomic_composition/
-   ./qc_alignment.sh /path/to/your/fastq/files
+   bash qc_alignment.sh <sample_id> <fastq_r1> <fastq_r2> <reference_fasta> [threads]
    ```
-3. **Step 2 - Locus Enrichment**: Perform LOLA enrichment analysis
+   This runs FastQC, aligns with BWA-MEM, and writes `results/alignment_out/<sample_id>.sorted.bam`.
+3. **Step 2 - Locus Enrichment**: Prepare region databases and run LOLA
    ```bash
    cd ../02_locus_enrichment/
+   python3 prepare_regionBD_forlola.py
+   python3 prepare_mtfeatures_forLOLA_regionDB.py
    Rscript lola_run.R
    ```
-4. **Step 3 - Abundance Quantification**: Calculate FPKM and correlations
+4. **Step 3 - Abundance Quantification**: Merge EV/SRR data, compute top 1% lists, and annotate genes
+   > **Note**: `bash script/run_pipeline.sh` skips steps [1/6] and [2/6] when `aligned.mapped.sorted.bam` is missing, then continues with the Python steps using the outputs already included in the repository.
    ```bash
    cd ../03_abundance_quantification/
-   python calculate_fpkm.py
-   python correlation_test.py
+   # Run full pipeline (recommended)
+   bash script/run_pipeline.sh
+
+   # Or run tasks individually:
+   bash task_01_fpkm/script/run_bedtools_coverage.sh
+   python3 task_01_fpkm/script/calculate_fpkm.py
+   python3 task_02_high_expression/script/merge_file.py          # generates merged CPM + top 1% files
+   python3 task_02_high_expression/script/correlation_test.py
+   python3 task_02_high_expression/script/intersect_genes.py     # uses default paths; or pass explicit paths
+   python3 task_03_gene_annotation/script/sgd_lookup.py         # default input is gene_mt_fpkm.csv
    ```
+   
+## Key Outputs
+The workflow generates the following outputs:
 
-## Directory Structure
-
-```
-exo_seq/
-├── 01_read_processing_and_genomic_composition/ # Quality control, alignment & composition analysis
-├── 02_locus_enrichment/                        # LOLA analysis for genomic feature enrichment
-├── 03_abundance_quantification/                # FPKM calculation and correlation analysis
-├── data/                                       # Reference genomes and annotations
-└── results/                                    # Final output files
-```
-
+| Stage | Output |
+|---|---|
+| Read Processing | Sorted BAM files and alignment statistics |
+| Genomic Composition | Feature composition summaries |
+| Locus Enrichment | LOLA enrichment results |
+| Abundance Quantification | Feature-level FPKM and CPM tables |
+| High-Abundance Analysis | Top 1% EV and RNA reference gene lists |
+| Annotation | SGD gene name annotations |
 
 ## References
 
