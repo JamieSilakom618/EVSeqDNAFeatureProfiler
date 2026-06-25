@@ -15,9 +15,9 @@ This computational pipeline analyzes DNA content in extracellular vesicles throu
 - **Data Availability**: All scripts and analysis parameters are provided for full reproducibility
 - **License**: MIT License
 
-## Data Availability
+## Data and Resource Availability
 
-Raw FASTQ and aligned BAM files are **not included** in this repository due to file size. Data submission is in progress.
+Raw FASTQ and aligned BAM files are **not included** in this repository due to file size. The EV-associated DNA sequencing data generated in this study have been submitted to the DNA Data Bank of Japan (DDBJ) Sequence Read Archive and have passed repository validation. The submission is currently under repository processing, and accession number(s) will be provided once assigned.
 
 Once raw data is available:
 1. Align reads using the script in `01_read_processing_and_genomic_composition/`:
