@@ -17,7 +17,7 @@ This computational pipeline analyzes DNA content in extracellular vesicles throu
 
 ## Data and Resource Availability
 
-Raw FASTQ and aligned BAM files are not included in this repository due to their large file size. The EV-associated DNA sequencing data generated in this study have been deposited in the DNA Data Bank of Japan (DDBJ) Sequence Read Archive under **BioProject accession PRJDB40093**. The raw sequencing data are available under **Run accession DRR1066343**.
+Raw FASTQ and aligned BAM files are not included in this repository due to their large file size. The EV-associated DNA sequencing data generated in this study have been deposited in the DNA Data Bank of Japan (DDBJ) Sequence Read Archive under **BioSample** accession **SAMD01796820**.
 
 All scripts, source code, analysis workflows, and documentation required to reproduce the analyses presented in this study are provided in this repository.
 
